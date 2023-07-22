@@ -1,0 +1,34 @@
+{
+	"schemaVersion": 1,
+	"id": "individualkeepinv",
+	"version": "${version}",
+	"name": "Individual Keep Inv",
+	"description": "Server-side Fabric mod that makes keepInventory work on an individual basis",
+	"authors": [
+		"rosecat-dev"
+	],
+	"contact": {
+		"homepage": "https://github.com/rosecat-dev",
+		"sources": "https://github.com/FabricMC/fabric-example-mod"
+	},
+	"license": "MIT",
+	"icon": "assets/individualkeepinv/icon.png",
+	"environment": "*",
+	"entrypoints": {
+		"main": [
+			"rose.individualkeepinv.IndividualKeepInv"
+		]
+	},
+	"mixins": [
+		"individualkeepinv.mixins.json"
+	],
+	"depends": {
+		"fabricloader": ">=0.14.21",
+		"minecraft": "~1.20.1",
+		"java": ">=17",
+		"fabric-api": "*"
+	},
+	"suggests": {
+		"another-mod": "*"
+	}
+}
