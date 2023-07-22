@@ -9,7 +9,7 @@
 	],
 	"contact": {
 		"homepage": "https://github.com/rosecat-dev",
-		"sources": "https://github.com/FabricMC/fabric-example-mod"
+		"sources": "https://github.com/rosecat-dev/IndividualKeepInv/"
 	},
 	"license": "MIT",
 	"icon": "assets/individualkeepinv/icon.png",
