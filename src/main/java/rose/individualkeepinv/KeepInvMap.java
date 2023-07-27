@@ -2,12 +2,10 @@ package rose.individualkeepinv;
 
 import net.fabricmc.fabric.api.networking.v1.PacketSender;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.network.ServerPlayNetworkHandler;
 import net.minecraft.server.network.ServerPlayerEntity;
-import net.minecraft.text.Text;
 import net.minecraft.world.PersistentState;
 import net.minecraft.world.PersistentStateManager;
 import net.minecraft.world.World;
@@ -25,6 +23,7 @@ public class KeepInvMap extends PersistentState {
 
     public static boolean getPlayerState (PlayerEntity player) { return kim.invStateMap.get(player.getUuid()); }
     public static void setPlayerState (PlayerEntity player, boolean bool) { kim.invStateMap.put(player.getUuid(), bool); }
+    public static void setDefaultState (boolean bool) { kim.keepInvDefault = bool; }
 
     @Override
     public NbtCompound writeNbt(NbtCompound nbt) {
@@ -35,16 +34,18 @@ public class KeepInvMap extends PersistentState {
             playersNbtCompound.put(String.valueOf(UUID), pInvStateNbt);
         });
         nbt.put("invStateCompound", playersNbtCompound);
+        nbt.putBoolean("keepInvDefault", keepInvDefault);
         return nbt;
     }
 
     public static KeepInvMap createFromNbt (NbtCompound nbt) {
-        nbt = nbt.getCompound("invStateCompound");
-        for (String key : nbt.getKeys()) {
-            boolean keepInvBool = nbt.getCompound(key).getBoolean("invBool");
+        NbtCompound nbt1 = nbt.getCompound("invStateCompound");
+        for (String key : nbt1.getKeys()) {
+            boolean keepInvBool = nbt1.getCompound(key).getBoolean("invBool");
             UUID uuid = UUID.fromString(key);
             kim.invStateMap.put(uuid,keepInvBool);
             }
+        kim.keepInvDefault = nbt.getBoolean("keepInvDefault");
         return kim;
         }
 

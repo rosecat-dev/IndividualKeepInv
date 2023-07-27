@@ -16,6 +16,16 @@ public class IKeepInvCommand {
     public static void commandLogic (CommandDispatcher<ServerCommandSource> dispatcher, CommandRegistryAccess registryAccess, CommandManager.RegistrationEnvironment environment) {
         dispatcher.register(literal("ikeepinv")
 
+                .then(CommandManager.literal("default")
+                        .then(CommandManager.argument("boolean", BoolArgumentType.bool())
+                                .requires(source -> source.hasPermissionLevel(3))
+                                .executes(ctx -> {
+                                    boolean bool = BoolArgumentType.getBool(ctx, "boolean");
+                                    KeepInvMap.setDefaultState(bool);
+                                    ctx.getSource().sendMessage(Text.of("The default state is now: " + bool));
+                                    return 1;
+                                })))
+
             .then(CommandManager.literal("get")
                     .then(CommandManager.argument("target", EntityArgumentType.player())
                             .requires(source -> source.hasPermissionLevel(3))
