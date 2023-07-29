@@ -34,7 +34,7 @@ public class KeepInvMap extends PersistentState {
             playersNbtCompound.put(String.valueOf(UUID), pInvStateNbt);
         });
         nbt.put("invStateCompound", playersNbtCompound);
-        nbt.putBoolean("keepInvDefault", keepInvDefault);
+        nbt.putBoolean("keepInvDefault", kim.keepInvDefault);
         return nbt;
     }
 
@@ -46,6 +46,7 @@ public class KeepInvMap extends PersistentState {
             kim.invStateMap.put(uuid,keepInvBool);
             }
         kim.keepInvDefault = nbt.getBoolean("keepInvDefault");
+        kim.markDirty();
         return kim;
         }
 

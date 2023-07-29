@@ -10,11 +10,19 @@ import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.text.Text;
 
 import static net.minecraft.server.command.CommandManager.literal;
+import static rose.individualkeepinv.KeepInvMap.kim;
 
 public class IKeepInvCommand {
 
     public static void commandLogic (CommandDispatcher<ServerCommandSource> dispatcher, CommandRegistryAccess registryAccess, CommandManager.RegistrationEnvironment environment) {
         dispatcher.register(literal("ikeepinv")
+
+                .then(CommandManager.literal("getdefault")
+                        .requires (source -> source.hasPermissionLevel(3))
+                                .executes(ctx -> {
+                                    ctx.getSource().sendMessage(Text.of("The current default state is: " + kim.keepInvDefault));
+                                    return 1;
+                                }))
 
                 .then(CommandManager.literal("default")
                         .requires (source -> source.hasPermissionLevel(3))
