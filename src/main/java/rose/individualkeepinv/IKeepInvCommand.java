@@ -18,14 +18,14 @@ public class IKeepInvCommand {
         dispatcher.register(literal("ikeepinv")
 
                 .then(CommandManager.literal("getdefault")
-                        .requires (source -> source.hasPermissionLevel(3))
+                        .requires (source -> source.hasPermissionLevel(2))
                                 .executes(ctx -> {
                                     ctx.getSource().sendMessage(Text.of("The current default state is: " + kim.keepInvDefault));
                                     return 1;
                                 }))
 
                 .then(CommandManager.literal("default")
-                        .requires (source -> source.hasPermissionLevel(3))
+                        .requires (source -> source.hasPermissionLevel(2))
                         .then(CommandManager.argument("boolean", BoolArgumentType.bool())
                                 .executes(ctx -> {
                                     boolean bool = BoolArgumentType.getBool(ctx, "boolean");
@@ -39,7 +39,7 @@ public class IKeepInvCommand {
                             .requires(source -> source.hasPermissionLevel(0))
                             .executes(ctx -> {
                                 ServerPlayerEntity player = EntityArgumentType.getPlayer(ctx, "target");
-                                if (ctx.getSource().hasPermissionLevel(3)) {  // hasPermissionLevel also works for permission levels above specified, so this works for permission level 4 as well
+                                if (ctx.getSource().hasPermissionLevel(2)) {  // hasPermissionLevel also works for permission levels above specified, so this works for permission level 4 as well
                                     ctx.getSource().sendMessage(Text.of(player.getEntityName() + "'s inventory state is currently: " + KeepInvMap.getPlayerState(player)));
                                 }
                                 else if (player.equals(ctx.getSource().getPlayer())) { // checks if player executing command is the same as the player passed to the command
@@ -57,7 +57,7 @@ public class IKeepInvCommand {
                                     .executes(ctx -> {
                                         ServerPlayerEntity player = EntityArgumentType.getPlayer(ctx, "target");
                                         boolean bool = BoolArgumentType.getBool(ctx, "boolean");
-                                        if (ctx.getSource().hasPermissionLevel(3)) {  // hasPermissionLevel also works for permission levels above specified, so this works for permission level 4 as well
+                                        if (ctx.getSource().hasPermissionLevel(2)) {  // hasPermissionLevel also works for permission levels above specified, so this works for permission level 4 as well
                                             KeepInvMap.setPlayerState(player, bool);
                                             ctx.getSource().sendMessage(Text.of(player.getEntityName() + "'s inventory state has been set to: " + bool));
                                         }

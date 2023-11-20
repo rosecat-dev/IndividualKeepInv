@@ -1,6 +1,7 @@
 package rose.individualkeepinv;
 
 import net.fabricmc.fabric.api.networking.v1.PacketSender;
+import net.minecraft.datafixer.DataFixTypes;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.server.MinecraftServer;
@@ -52,7 +53,7 @@ public class KeepInvMap extends PersistentState {
 
         public static KeepInvMap getInvStates(MinecraftServer server) {
         PersistentStateManager psm = server.getWorld(World.OVERWORLD).getPersistentStateManager();
-            return psm.getOrCreate(KeepInvMap::createFromNbt, KeepInvMap::new, MOD_ID);
+            return psm.getOrCreate(new Type<>(KeepInvMap::new, KeepInvMap::createFromNbt, DataFixTypes.PLAYER), MOD_ID);
         }
 
     public static void onJoin(ServerPlayNetworkHandler handler, PacketSender sender, MinecraftServer server) {
