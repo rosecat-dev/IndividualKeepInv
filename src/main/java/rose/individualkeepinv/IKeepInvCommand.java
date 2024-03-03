@@ -40,10 +40,10 @@ public class IKeepInvCommand {
                             .executes(ctx -> {
                                 ServerPlayerEntity player = EntityArgumentType.getPlayer(ctx, "target");
                                 if (ctx.getSource().hasPermissionLevel(2)) {  // hasPermissionLevel also works for permission levels above specified, so this works for permission level 4 as well
-                                    ctx.getSource().sendMessage(Text.of(player.getEntityName() + "'s inventory state is currently: " + KeepInvMap.getPlayerState(player)));
+                                    ctx.getSource().sendMessage(Text.of(player.getName().getString() + "'s inventory state is currently: " + KeepInvMap.getPlayerState(player)));
                                 }
                                 else if (player.equals(ctx.getSource().getPlayer())) { // checks if player executing command is the same as the player passed to the command
-                                    ctx.getSource().sendMessage(Text.of(player.getEntityName() + "'s inventory state is currently: " + KeepInvMap.getPlayerState(player)));
+                                    ctx.getSource().sendMessage(Text.of(player.getName().getString() + "'s inventory state is currently: " + KeepInvMap.getPlayerState(player)));
                                 }
                                 else {
                                     ctx.getSource().sendError(Text.of("Non-OP players cannot view other player's inventory states."));
@@ -59,11 +59,11 @@ public class IKeepInvCommand {
                                         boolean bool = BoolArgumentType.getBool(ctx, "boolean");
                                         if (ctx.getSource().hasPermissionLevel(2)) {  // hasPermissionLevel also works for permission levels above specified, so this works for permission level 4 as well
                                             KeepInvMap.setPlayerState(player, bool);
-                                            ctx.getSource().sendMessage(Text.of(player.getEntityName() + "'s inventory state has been set to: " + bool));
+                                            ctx.getSource().sendMessage(Text.of(player.getName().getString() + "'s inventory state has been set to: " + bool));
                                         }
                                         else if (player.equals(ctx.getSource().getPlayer())) { // checks if player executing command is the same as the player passed to the command
                                             KeepInvMap.setPlayerState(player, bool);
-                                            ctx.getSource().sendMessage(Text.of(player.getEntityName() + "'s inventory state has been set to: " + bool));
+                                            ctx.getSource().sendMessage(Text.of(player.getName().getString() + "'s inventory state has been set to: " + bool));
                                         }
                                         else {
                                             ctx.getSource().sendError(Text.of("Non-OP players cannot alter other player's inventory states."));
