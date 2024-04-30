@@ -4,6 +4,7 @@ import net.fabricmc.fabric.api.networking.v1.PacketSender;
 import net.minecraft.datafixer.DataFixTypes;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.nbt.NbtCompound;
+import net.minecraft.registry.RegistryWrapper.WrapperLookup;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.network.ServerPlayNetworkHandler;
 import net.minecraft.server.network.ServerPlayerEntity;
@@ -27,7 +28,7 @@ public class KeepInvMap extends PersistentState {
     public static void setDefaultState (boolean bool) { kim.keepInvDefault = bool; }
 
     @Override
-    public NbtCompound writeNbt(NbtCompound nbt) {
+    public NbtCompound writeNbt(NbtCompound nbt, WrapperLookup wrapperLookup) {
         NbtCompound playersNbtCompound = new NbtCompound();
         kim.invStateMap.forEach((UUID, Boolean) -> {
             NbtCompound pInvStateNbt = new NbtCompound();
@@ -39,7 +40,7 @@ public class KeepInvMap extends PersistentState {
         return nbt;
     }
 
-    public static KeepInvMap createFromNbt (NbtCompound nbt) {
+    public static KeepInvMap createFromNbt (NbtCompound nbt, WrapperLookup wrapperLookup) {
         NbtCompound nbt1 = nbt.getCompound("invStateCompound");
         for (String key : nbt1.getKeys()) {
             boolean keepInvBool = nbt1.getCompound(key).getBoolean("invBool");
@@ -52,7 +53,7 @@ public class KeepInvMap extends PersistentState {
         }
 
         public static KeepInvMap getInvStates(MinecraftServer server) {
-        PersistentStateManager psm = server.getWorld(World.OVERWORLD).getPersistentStateManager();
+            PersistentStateManager psm = server.getWorld(World.OVERWORLD).getPersistentStateManager();
             return psm.getOrCreate(new Type<>(KeepInvMap::new, KeepInvMap::createFromNbt, DataFixTypes.PLAYER), MOD_ID);
         }
 
