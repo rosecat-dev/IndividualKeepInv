@@ -40,4 +40,4 @@ jobs:
         with:
           name: Secret Rooms Nightly
           path: |
-            ${{ github.workspace }}/fabric/build/libs/*.jar
+            ${{ github.workspace }}/build/libs/*.jar
