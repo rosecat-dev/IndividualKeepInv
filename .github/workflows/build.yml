@@ -38,6 +38,6 @@ jobs:
       - name: Upload Build
         uses: actions/upload-artifact@v4
         with:
-          name: Secret Rooms Nightly
+          name: IndividualKeepInv Nightly
           path: |
             ${{ github.workspace }}/build/libs/*.jar
