@@ -2,6 +2,7 @@ package rose.individualkeepinv;
 
 import net.fabricmc.fabric.api.networking.v1.PacketSender;
 import net.minecraft.datafixer.DataFixTypes;
+import net.minecraft.entity.player.HungerManager;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.registry.RegistryWrapper.WrapperLookup;
@@ -70,6 +71,9 @@ public class KeepInvMap extends PersistentState {
             if (!alive && kim.invStateMap.get(oldPlayer.getUuid())) {
                 newPlayer.copyFrom(oldPlayer, true);
                 newPlayer.setHealth(20.0f);
+                HungerManager hungerManager = newPlayer.getHungerManager();
+                hungerManager.setFoodLevel(20);
+                hungerManager.setSaturationLevel(20.0f);
             }
             if (!alive && !kim.invStateMap.get(oldPlayer.getUuid())) {
                 newPlayer.experienceLevel = 0;
