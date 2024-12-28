@@ -17,7 +17,7 @@ import static rose.individualkeepinv.KeepInvMap.kim;
     @Shadow protected void vanishCursedItems() {}
 
     @Inject(method = "dropInventory", at = @At("HEAD"), cancellable = true)
-    public void onDeath(CallbackInfo info) {
+    public void onDropInventory(CallbackInfo info) {
         PlayerEntity player = ((PlayerEntity) (Object) this); // Getting the "this" instance in the PlayerEntity class
             if (!kim.invStateMap.get(player.getUuid())) {
                 // Not using the player variable here as the @Shadow annotation allows me to use the "this" instance directly

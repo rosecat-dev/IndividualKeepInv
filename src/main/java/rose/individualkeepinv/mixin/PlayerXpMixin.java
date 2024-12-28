@@ -11,8 +11,8 @@ import static rose.individualkeepinv.KeepInvMap.kim;
 @Mixin(PlayerEntity.class)
 public abstract class PlayerXpMixin {
 
-    @Inject(method = "getXpToDrop", at = @At("HEAD"), cancellable = true)
-    public void onGetXpToDrop(CallbackInfoReturnable<Integer> info) {
+    @Inject(method = "getExperienceToDrop", at = @At("HEAD"), cancellable = true)
+    public void onGetExperienceToDrop(CallbackInfoReturnable<Integer> info) {
         PlayerEntity player = ((PlayerEntity) (Object) this); // Getting the "this" instance in the PlayerEntity class
         if (kim.invStateMap.get(player.getUuid()) || player.isSpectator()) {
             info.setReturnValue(0);
