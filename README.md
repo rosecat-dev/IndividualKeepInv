@@ -1,4 +1,6 @@
-# IndividualKeepInv
+# NOTICE: **This project is no longer maintained by me. Feel free to update the mod yourself though!**
+
+## IndividualKeepInv
 **Do you have that one friend who keeps dying on your server, and keeps asking for keepInventory to be turned on, which you would gladly do... that is, if it wasn't forced on the rest of your players, none of whom want it?**
 
 Individual Keep Inventory is a Fabric mod for making keepInventory work on an individual basis.
